@@ -1,0 +1,72 @@
+# ---------- 依赖 ----------
+node_modules/
+jspm_packages/
+.pnp
+.pnp.js
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ---------- 构建产物 ----------
+dist/
+build/
+out/
+*.tsbuildinfo
+
+
+# ---------- 日志 ----------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---------- 测试 / 覆盖率 ----------
+coverage/
+.nyc_output/
+*.lcov
+.vitest/
+vitest.config.*.timestamp-*
+
+# ---------- 环境变量 / 密钥 ----------
+.env
+.env.local
+.env.*.local
+!.env.example
+*.pem
+*.key
+
+# ---------- 编辑器 / IDE ----------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*.iml
+.project
+.classpath
+
+# ---------- 操作系统 ----------
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---------- 临时文件 ----------
+*.tmp
+*.temp
+.cache/
+.temp/
+tmp/
+
+# ---------- 其它 ----------
+.eslintcache
+.stylelintcache
+node_modules/.cache/

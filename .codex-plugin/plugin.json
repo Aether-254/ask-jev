@@ -1,0 +1,25 @@
+{
+  "name": "ask-jev",
+  "version": "0.1.0",
+  "description": "Typed, low-latency decisions through the Jev System One API.",
+  "author": {
+    "name": "ask-jev contributors"
+  },
+  "keywords": ["jev", "classification", "scoring", "decision-support", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Ask Jev",
+    "shortDescription": "Fast typed classification, scoring, and probability judgments",
+    "longDescription": "Use Jev's System One model for low-latency typed decisions over text and structured state: select from described choices, score on ordered scales, estimate proposition probabilities, and batch-classify many independent items.",
+    "developerName": "ask-jev contributors",
+    "category": "Developer Tools",
+    "capabilities": ["Classification", "Scoring", "Batch processing"],
+    "defaultPrompt": [
+      "Classify these items with Jev.",
+      "Score this state on an ordered scale.",
+      "Estimate the probability of this proposition."
+    ],
+    "brandColor": "#6D5EF5"
+  }
+}

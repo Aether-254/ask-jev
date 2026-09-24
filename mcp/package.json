@@ -1,0 +1,28 @@
+{
+  "name": "ask-jev-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MCP server exposing Jev (TypeSafe System One) typed decisions: choice, score, noul.",
+  "type": "module",
+  "bin": {
+    "ask-jev-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "vitest run",
+    "test:live": "cross-env JEV_LIVE=1 vitest run test/live.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "undici": "^7.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  }
+}

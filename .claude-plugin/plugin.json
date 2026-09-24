@@ -1,0 +1,9 @@
+{
+  "name": "ask-jev",
+  "version": "0.1.0",
+  "description": "Typed, low-latency decisions through the Jev System One API.",
+  "author": {
+    "name": "ask-jev contributors"
+  },
+  "mcpServers": "./.mcp.json"
+}
