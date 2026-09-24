@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "description": "Typed, low-latency decisions through the Jev System One API.",
   "author": {
-    "name": "ask-jev contributors"
+    "name": "Aether-254",
+    "url": "https://github.com/Aether-254"
   },
+  "homepage": "https://github.com/Aether-254/ask-jev#readme",
+  "repository": "https://github.com/Aether-254/ask-jev",
+  "license": "MIT",
   "keywords": ["jev", "classification", "scoring", "decision-support", "mcp"],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
@@ -12,7 +16,7 @@
     "displayName": "Ask Jev",
     "shortDescription": "Fast typed classification, scoring, and probability judgments",
     "longDescription": "Use Jev's System One model for low-latency typed decisions over text and structured state: select from described choices, score on ordered scales, estimate proposition probabilities, and batch-classify many independent items.",
-    "developerName": "ask-jev contributors",
+    "developerName": "Aether-254",
     "category": "Developer Tools",
     "capabilities": ["Classification", "Scoring", "Batch processing"],
     "defaultPrompt": [

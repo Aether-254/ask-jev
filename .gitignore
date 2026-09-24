@@ -11,6 +11,8 @@ jspm_packages/
 
 # ---------- 构建产物 ----------
 dist/
+!mcp/dist/
+!mcp/dist/index.js
 build/
 out/
 *.tsbuildinfo

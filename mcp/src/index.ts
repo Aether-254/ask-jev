@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { JevClient, configFromEnv, type Questions } from "./client.js";
+import { JevClient, configFromEnv, type Questions, type StructuredText } from "./client.js";
 import { batchEvaluate } from "./batch.js";
 import { evaluateInput, batchEvaluateInput } from "./schema.js";
 
@@ -27,7 +27,7 @@ server.registerTool(
   },
   async ({ state, questions, model }) => {
     try {
-      return json(await client.systemOne(state, questions as Questions, model));
+      return json(await client.systemOne(state as StructuredText, questions as Questions, model));
     } catch (err) {
       return fail(err);
     }
@@ -46,7 +46,7 @@ server.registerTool(
   },
   async ({ states, questions, model, concurrency }) => {
     try {
-      return json(await batchEvaluate(client, states, questions as Questions, concurrency, model));
+      return json(await batchEvaluate(client, states as StructuredText[], questions as Questions, concurrency, model));
     } catch (err) {
       return fail(err);
     }

@@ -55,6 +55,27 @@ describe("JevClient.systemOne", () => {
     expect(JSON.parse(seen.body)).toEqual({ model: "m", state: "s", questions: { q: { type: "noul", instructions: "i" } } });
   });
 
+  it("preserves structured state, instructions, and criteria", async () => {
+    let body: any;
+    const { fetch } = fakeFetch((_n, init) => {
+      body = JSON.parse(init.body);
+      return { status: 200, body: { model: "m", answers: { duplicate: { type: "noul", noul: 0.8 } } } };
+    });
+    await new JevClient(cfg, fetch, {}).systemOne(
+      { candidate: { name: "Ada" }, records: ["Ada", "Grace"] },
+      {
+        duplicate: {
+          type: "noul",
+          instructions: { question: "Does candidate match a record?", compare: ["name"] },
+          criteria: { true: "same person", false: { rule: "different person" } },
+        },
+      },
+    );
+    expect(body.state.candidate.name).toBe("Ada");
+    expect(body.questions.duplicate.instructions.compare).toEqual(["name"]);
+    expect(body.questions.duplicate.criteria.false).toEqual({ rule: "different person" });
+  });
+
   it("retries 429 then succeeds", async () => {
     const { fetch, calls } = fakeFetch((n) => (n < 3 ? { status: 429, body: "slow down" } : { status: 200, body: { model: "m", answers: {} } }));
     await new JevClient(cfg, fetch, {}).systemOne("s", { q: { type: "noul", instructions: "i" } });
@@ -94,5 +115,23 @@ describe("questionsSchema", () => {
       c: { type: "noul", instructions: "i" },
     });
     expect(r.success).toBe(true);
+  });
+  it("accepts structured values and noul criteria", () => {
+    const r = questionsSchema.safeParse({
+      a: {
+        type: "choice",
+        instructions: { task: "route", context: ["customer", "region"] },
+        criteria: { x: null, y: { team: "support" } },
+      },
+      b: { type: "score", instructions: ["rate", { field: "urgency" }], criteria: ["low", { level: "high" }] },
+      c: { type: "noul", instructions: { proposition: "is duplicate" }, criteria: { true: "same", false: "different" } },
+    });
+    expect(r.success).toBe(true);
+  });
+  it("rejects score scales above the API limit", () => {
+    const r = questionsSchema.safeParse({
+      q: { type: "score", instructions: "rate", criteria: Array.from({ length: 11 }, (_, i) => `level ${i}`) },
+    });
+    expect(r.success).toBe(false);
   });
 });

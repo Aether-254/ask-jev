@@ -1,25 +1,29 @@
 import { fetch as undiciFetch, ProxyAgent, type Dispatcher } from "undici";
 
+export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+export type StructuredText = string | JsonValue[] | { [key: string]: JsonValue };
+
 export type ChoiceQuestion = {
   type: "choice";
-  instructions: string;
-  criteria: Record<string, string>;
+  instructions: StructuredText;
+  criteria: Record<string, JsonValue>;
 };
 export type ScoreQuestion = {
   type: "score";
-  instructions: string;
-  criteria: string[];
+  instructions: StructuredText;
+  criteria: StructuredText[];
 };
 export type NoulQuestion = {
   type: "noul";
-  instructions: string;
+  instructions: StructuredText;
+  criteria?: { true?: JsonValue; false?: JsonValue };
 };
 export type Question = ChoiceQuestion | ScoreQuestion | NoulQuestion;
 export type Questions = Record<string, Question>;
 
 export type SystemOneRequest = {
   model: string;
-  state: string;
+  state: StructuredText;
   questions: Questions;
 };
 
@@ -85,7 +89,7 @@ export class JevClient {
     this.dispatcher = proxyDispatcher(env);
   }
 
-  async systemOne(state: string, questions: Questions, model?: string): Promise<SystemOneResponse> {
+  async systemOne(state: StructuredText, questions: Questions, model?: string): Promise<SystemOneResponse> {
     const body: SystemOneRequest = { model: model ?? this.config.model, state, questions };
     const headers: Record<string, string> = { "content-type": "application/json" };
     if (this.config.apiKey) headers.authorization = `Bearer ${this.config.apiKey}`;

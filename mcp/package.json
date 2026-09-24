@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "description": "MCP server exposing Jev (TypeSafe System One) typed decisions: choice, score, noul.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aether-254/ask-jev.git",
+    "directory": "mcp"
+  },
+  "homepage": "https://github.com/Aether-254/ask-jev#readme",
   "type": "module",
   "bin": {
     "ask-jev-mcp": "dist/index.js"
@@ -10,6 +17,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "test": "vitest run",
+    "test:smoke": "node scripts/smoke.mjs",
     "test:live": "cross-env JEV_LIVE=1 vitest run test/live.test.ts",
     "typecheck": "tsc --noEmit"
   },

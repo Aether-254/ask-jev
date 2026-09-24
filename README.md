@@ -1,12 +1,29 @@
 # ask-jev
 
+[![CI](https://github.com/Aether-254/ask-jev/actions/workflows/ci.yml/badge.svg)](https://github.com/Aether-254/ask-jev/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 `ask-jev` exposes the Jev System One API as an MCP server and packages it as a Codex/Claude plugin. It provides three tools:
 
 - `jev_evaluate`: ask one or more typed questions about one state.
 - `jev_batch_evaluate`: apply one question set to many independent states with bounded concurrency.
 - `jev_ping`: verify endpoint, credentials, model, and round-trip latency.
 
-The supported question primitives are `choice`, `score`, and `noul` (a probability in `[0, 1]`).
+The supported question primitives are `choice`, `score`, and `noul` (a probability in `[0, 1]`). States, instructions, and criteria can contain structured JSON as supported by the TypeSafe API.
+
+## Requirements
+
+- Node.js 20 or newer
+- A TypeSafe API key from the [TypeSafe console](https://console.typesafe.ai/keys)
+
+Clone the repository and expose the key to the process that launches your MCP client:
+
+```powershell
+git clone https://github.com/Aether-254/ask-jev.git
+$env:TYPESAFE_API_KEY = "<your-key>"
+```
+
+The repository includes `.mcp.json` for clients that discover project-local MCP servers. Its entrypoint is the committed `mcp/dist/index.js` bundle, so consumers do not need to install npm dependencies or compile TypeScript.
 
 ## Configuration
 
@@ -34,6 +51,7 @@ npm ci
 npm test
 npm run typecheck
 npm run build
+npm run test:smoke
 ```
 
 Run the live integration test only when the backend is reachable:

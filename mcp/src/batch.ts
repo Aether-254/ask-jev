@@ -1,12 +1,12 @@
-import { JevClient, type Questions, type SystemOneResponse } from "./client.js";
+import { JevClient, type Questions, type StructuredText, type SystemOneResponse } from "./client.js";
 
 export type BatchItem =
-  | { index: number; state: string; ok: true; answers: SystemOneResponse["answers"] }
-  | { index: number; state: string; ok: false; error: string };
+  | { index: number; state: StructuredText; ok: true; answers: SystemOneResponse["answers"] }
+  | { index: number; state: StructuredText; ok: false; error: string };
 
 export async function batchEvaluate(
   client: JevClient,
-  states: string[],
+  states: StructuredText[],
   questions: Questions,
   concurrency: number,
   model?: string,

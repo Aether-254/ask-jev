@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "description": "Typed, low-latency decisions through the Jev System One API.",
   "author": {
-    "name": "ask-jev contributors"
+    "name": "Aether-254",
+    "url": "https://github.com/Aether-254"
   },
+  "homepage": "https://github.com/Aether-254/ask-jev#readme",
+  "repository": "https://github.com/Aether-254/ask-jev",
+  "license": "MIT",
   "mcpServers": "./.mcp.json"
 }
